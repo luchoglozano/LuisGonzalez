@@ -1,0 +1,118 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Asistente Virtual - HeyGen</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f9f9f9;
+      margin: 0;
+      padding: 40px;
+      text-align: center;
+    }
+    h1 {
+      color: #333;
+      margin-bottom: 10px;
+    }
+    p {
+      color: #555;
+      font-size: 16px;
+      max-width: 600px;
+      margin: 0 auto 20px;
+    }
+    .cta-button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 14px 28px;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .cta-button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>👋 Habla con nuestro asistente virtual</h1>
+  <p>Si no ves el avatar aparecer automáticamente, puedes hacer clic en el siguiente botón para iniciar la conversación en una nueva pestaña.</p>
+  <a class="cta-button" href="https://labs.heygen.com/interactive-avatar/share?share=eyJxdWFsaXR5IjoiaGlnaCIsImF2YXRhck5hbWUiOiI2YmZjMzMzNzdmYWY0YmVhYmQwYzAxNzFmYmQyYzM3NiIsInByZXZpZXdJbWciOiJodHRwczovL2ZpbGVzMi5oZXlnZW4uYWkvYXZhdGFyL3YzLzZiZmMzMzM3N2ZhZjRiZWFiZDBjMDE3MWZiZDJjMzc2L2Z1bGwvMi4yL3ByZXZpZXdfdGFyZ2V0LndlYnAiLCJuZWVkUmVtb3ZlQmFja2dyb3VuZCI6ZmFsc2UsImtub3dsZWRnZUJhc2VJZCI6ImQ1NWIxY2M0NmU0MjQ1OTE5YmI1OTE5ZmNmYjQ4ZjUyIiwidXNlcm5hbWUiOiIxNDUyOGVmOTE1MjM0MzI3YjE5NWYyMjQzNGIzYjQ1OSJ9" target="_blank">Iniciar conversación</a>
+
+  <script>
+  !function(window){
+    const host="https://labs.heygen.com",
+    url=host+"/guest/streaming-embed?share=eyJxdWFsaXR5IjoiaGlnaCIsImF2YXRhck5hbWUiOiI2YmZjMzMzNzdmYWY0YmVhYmQwYzAxNzFmYmQyYzM3NiIsInByZXZpZXdJbWciOiJodHRwczovL2ZpbGVzMi5oZXlnZW4uYWkvYXZhdGFyL3YzLzZiZmMzMzM3N2ZhZjRiZWFiZDBjMDE3MWZiZDJjMzc2L2Z1bGwvMi4yL3ByZXZpZXdfdGFyZ2V0LndlYnAiLCJuZWVkUmVtb3ZlQmFja2dyb3VuZCI6ZmFsc2UsImtub3dsZWRnZUJhc2VJZCI6ImQ1NWIxY2M0NmU0MjQ1OTE5YmI1OTE5ZmNmYjQ4ZjUyIiwidXNlcm5hbWUiOiIxNDUyOGVmOTE1MjM0MzI3YjE5NWYyMjQzNGIzYjQ1OSJ9&inIFrame=1",
+    clientWidth=document.body.clientWidth,
+    wrapDiv=document.createElement("div");
+
+    wrapDiv.id="heygen-streaming-embed";
+    const container=document.createElement("div");
+    container.id="heygen-streaming-container";
+    const stylesheet=document.createElement("style");
+
+    stylesheet.innerHTML = `
+      #heygen-streaming-embed {
+        z-index: 9999;
+        position: fixed;
+        left: 40px;
+        bottom: 40px;
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        border: 2px solid #fff;
+        box-shadow: 0px 8px 24px 0px rgba(0, 0, 0, 0.12);
+        transition: all linear 0.1s;
+        overflow: hidden;
+        opacity: 0;
+        visibility: hidden;
+      }
+      #heygen-streaming-embed.show {
+        opacity: 1;
+        visibility: visible;
+      }
+      #heygen-streaming-embed.expand {
+        ${clientWidth<540?"height: 266px; width: 96%; left: 50%; transform: translateX(-50%);":"height: 366px; width: calc(366px * 16 / 9);"}
+        border: 0;
+        border-radius: 8px;
+      }
+      #heygen-streaming-container {
+        width: 100%;
+        height: 100%;
+      }
+      #heygen-streaming-container iframe {
+        width: 100%;
+        height: 100%;
+        border: 0;
+      }
+    `;
+
+    const iframe=document.createElement("iframe");
+    iframe.allowFullscreen = false;
+    iframe.title="Streaming Embed";
+    iframe.role="dialog";
+    iframe.allow="microphone";
+    iframe.src=url;
+
+    let visible=false, initial=false;
+
+    window.addEventListener("message",(e=>{
+      e.origin===host && e.data && e.data.type && "streaming-embed"===e.data.type && (
+        "init"===e.data.action ? (initial=true, wrapDiv.classList.toggle("show",initial)) :
+        "show"===e.data.action ? (visible=true, wrapDiv.classList.toggle("expand",visible)) :
+        "hide"===e.data.action && (visible=false, wrapDiv.classList.toggle("expand",visible))
+      );
+    }));
+
+    container.appendChild(iframe);
+    wrapDiv.appendChild(stylesheet);
+    wrapDiv.appendChild(container);
+    document.body.appendChild(wrapDiv);
+  }(globalThis);
+  </script>
+</body>
+</html>
