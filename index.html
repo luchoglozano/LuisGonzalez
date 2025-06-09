@@ -8,63 +8,64 @@
       font-family: 'Arial', sans-serif;
       background-color: #f9f9f9;
       margin: 0;
-      padding: 0;
+      padding: 40px 20px;
       text-align: center;
     }
 
     h1 {
-      color: #333;
-      margin-top: 40px;
+      color: #222;
+      margin-bottom: 10px;
     }
 
-    #agent-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 80vh;
-      margin-top: 20px;
+    p {
+      color: #444;
+      font-size: 16px;
+      max-width: 600px;
+      margin: 0 auto 30px;
     }
 
-    #heygen-streaming-embed {
-      width: 480px;
-      height: 480px;
-      border-radius: 12px;
-      border: none;
-      box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.2);
-      transition: all 0.2s ease-in-out;
+    .iframe-container {
+      width: 100%;
+      max-width: 640px;
+      height: 720px;
+      margin: 0 auto;
+      box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.12);
+      border-radius: 16px;
       overflow: hidden;
     }
 
-    #heygen-streaming-container iframe {
+    iframe {
       width: 100%;
       height: 100%;
-      border: 0;
+      border: none;
+    }
+
+    @media (max-width: 700px) {
+      .iframe-container {
+        height: 600px;
+      }
+    }
+
+    @media (max-width: 500px) {
+      .iframe-container {
+        height: 500px;
+      }
     }
   </style>
 </head>
 <body>
 
   <h1>👋 Habla con nuestro Asistente Virtual</h1>
-  <div id="agent-container">
-    <div id="heygen-streaming-embed">
-      <div id="heygen-streaming-container"></div>
-    </div>
+  <p>Este asistente puede responder tus dudas en tiempo real. Selecciona el idioma en el menú si deseas traducir la conversación.</p>
+
+  <div class="iframe-container">
+    <iframe 
+      src="https://labs.heygen.com/guest/streaming-embed?share=eyJxdWFsaXR5IjoiaGlnaCIsImF2YXRhck5hbWUiOiI2YmZjMzMzNzdmYWY0YmVhYmQwYzAxNzFmYmQyYzM3NiIsInByZXZpZXdJbWciOiJodHRwczovL2ZpbGVzMi5oZXlnZW4uYWkvYXZhdGFyL3YzLzZiZmMzMzM3N2ZhZjRiZWFiZDBjMDE3MWZiZDJjMzc2L2Z1bGwvMi4yL3ByZXZpZXdfdGFyZ2V0LndlYnAiLCJuZWVkUmVtb3ZlQmFja2dyb3VuZCI6ZmFsc2UsImtub3dsZWRnZUJhc2VJZCI6ImQ1NWIxY2M0NmU0MjQ1OTE5YmI1OTE5ZmNmYjQ4ZjUyIiwidXNlcm5hbWUiOiIxNDUyOGVmOTE1MjM0MzI3YjE5NWYyMjQzNGIzYjQ1OSJ9&inIFrame=1" 
+      allow="microphone"
+      title="Asistente HeyGen"
+      allowfullscreen>
+    </iframe>
   </div>
 
-  <script>
-  !function(window){
-    const host = "https://labs.heygen.com",
-    url = host + "/guest/streaming-embed?share=eyJxdWFsaXR5IjoiaGlnaCIsImF2YXRhck5hbWUiOiI2YmZjMzMzNzdmYWY0YmVhYmQwYzAxNzFmYmQyYzM3NiIsInByZXZpZXdJbWciOiJodHRwczovL2ZpbGVzMi5oZXlnZW4uYWkvYXZhdGFyL3YzLzZiZmMzMzM3N2ZhZjRiZWFiZDBjMDE3MWZiZDJjMzc2L2Z1bGwvMi4yL3ByZXZpZXdfdGFyZ2V0LndlYnAiLCJuZWVkUmVtb3ZlQmFja2dyb3VuZCI6ZmFsc2UsImtub3dsZWRnZUJhc2VJZCI6ImQ1NWIxY2M0NmU0MjQ1OTE5YmI1OTE5ZmNmYjQ4ZjUyIiwidXNlcm5hbWUiOiIxNDUyOGVmOTE1MjM0MzI3YjE5NWYyMjQzNGIzYjQ1OSJ9&inIFrame=1";
-
-    const container = document.getElementById("heygen-streaming-container");
-    const iframe = document.createElement("iframe");
-    iframe.allowFullscreen = false;
-    iframe.title = "Streaming Embed";
-    iframe.role = "dialog";
-    iframe.allow = "microphone";
-    iframe.src = url;
-    container.appendChild(iframe);
-  }(globalThis);
-  </script>
 </body>
 </html>
