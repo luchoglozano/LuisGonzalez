@@ -2,37 +2,51 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Asistente Virtual - HeyGen</title>
+  <title>Asistente Virtual - ArmonIA</title>
   <style>
     body {
       font-family: 'Arial', sans-serif;
-      background-color: #f9f9f9;
       margin: 0;
       padding: 0;
+      background-color: #f4f4f4;
       text-align: center;
     }
 
-    h1 {
-      color: #333;
-      margin-top: 40px;
+    header {
+      margin-top: 50px;
     }
 
-    #agent-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 80vh;
-      margin-top: 20px;
+    h1 {
+      font-size: 28px;
+      color: #222;
+    }
+
+    p {
+      color: #555;
+      font-size: 18px;
+      margin: 10px 30px 30px;
     }
 
     #heygen-streaming-embed {
+      z-index: 9999;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
       width: 640px;
-      height: 640px;
+      height: 360px;
       border-radius: 12px;
       border: none;
       box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.2);
       transition: all 0.2s ease-in-out;
       overflow: hidden;
+      opacity: 1;
+      visibility: visible;
+    }
+
+    #heygen-streaming-container {
+      width: 100%;
+      height: 100%;
     }
 
     #heygen-streaming-container iframe {
@@ -40,26 +54,34 @@
       height: 100%;
       border: 0;
     }
-
-    @media (max-width: 700px) {
-      #heygen-streaming-embed {
-        width: 100%;
-        height: 600px;
-        border-radius: 0;
-      }
-    }
   </style>
 </head>
 <body>
 
-  <h1>👋 Habla con nuestro Asistente Virtual</h1>
-  <div id="agent-container">
-    <div id="heygen-streaming-embed">
-      <div id="heygen-streaming-container"></div>
-    </div>
+  <header>
+    <h1>👋 Bienvenido a tu asistente virtual</h1>
+    <p>Puedes interactuar directamente con nuestro agente inteligente para resolver tus dudas sobre la nueva forma de trabajar en publicidad. Conoce todas las ventajas que te ofrece trabajar con Creactive Marketing.</p>
+  </header>
+
+  <div id="heygen-streaming-embed">
+    <div id="heygen-streaming-container"></div>
   </div>
 
   <script>
   !function(window){
     const host = "https://labs.heygen.com",
-    url = host + "/guest/streaming-embed?share=e
+    url = host + "/guest/streaming-embed?share=eyJxdWFsaXR5IjoiaGlnaCIsImF2YXRhck5hbWUiOiI2YmZjMzMzNzdmYWY0YmVhYmQwYzAxNzFmYmQyYzM3NiIsInByZXZpZXdJbWciOiJodHRwczovL2ZpbGVzMi5oZXlnZW4uYWkvYXZhdGFyL3YzLzZiZmMzMzM3N2ZhZjRiZWFiZDBjMDE3MWZiZDJjMzc2L2Z1bGwvMi4yL3ByZXZpZXdfdGFyZ2V0LndlYnAiLCJuZWVkUmVtb3ZlQmFja2dyb3VuZCI6ZmFsc2UsImtub3dsZWRnZUJhc2VJZCI6ImQ1NWIxY2M0NmU0MjQ1OTE5YmI1OTE5ZmNmYjQ4ZjUyIiwidXNlcm5hbWUiOiIxNDUyOGVmOTE1MjM0MzI3YjE5NWYyMjQzNGIzYjQ1OSJ9&inIFrame=1";
+
+    const container = document.getElementById("heygen-streaming-container");
+    const iframe = document.createElement("iframe");
+    iframe.allowFullscreen = false;
+    iframe.title = "Streaming Embed";
+    iframe.role = "dialog";
+    iframe.allow = "microphone";
+    iframe.src = url;
+    container.appendChild(iframe);
+  }(globalThis);
+  </script>
+
+</body>
+</html>
